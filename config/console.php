@@ -2,14 +2,11 @@
 
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests');
 
-return [
+$config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'gii'],
+    'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
-    'modules' => [
-        'gii' => 'yii\gii\Module',
-    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -26,3 +23,13 @@ return [
     ],
     'params' => require(__DIR__ . '/params.php'),
 ];
+
+if (APPLICATION_ENV == "dev")
+{
+    $config['bootstrap'][] = 'gii';
+    $config['modules'] = [
+        'gii' => 'yii\gii\Module'  
+    ];
+}
+
+return $config;

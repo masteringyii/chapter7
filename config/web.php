@@ -18,6 +18,11 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'showScriptName' => false,
+            'enablePrettyUrl' => true,
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -31,5 +36,16 @@ $config = [
     ],
     'params' => require(__DIR__ . '/params.php'),
 ];
+
+if (APPLICATION_ENV == "dev")
+{
+    $config['bootstrap'][] = 'gii';
+    $config['modules'] = [
+        'gii' => [
+            'class' => 'yii\gii\Module',
+            'allowedIPs' => ['*']
+        ] 
+    ];
+}
 
 return $config;
