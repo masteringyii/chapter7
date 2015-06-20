@@ -48,7 +48,7 @@ class m150523_203944_relational extends Migration
 
 		$this->batchInsert('user', ['id', 'email', 'password', 'first_name', 'last_name', 'role_id', 'created_at', 'updated_at'], [
 			[1, 'jane.doe@example.com', password_hash('password1', PASSWORD_BCRYPT, ['cost' => 13]), 'Jane', 'Joe', 1, time(), time()],
-			[2, 'john.doe@example.com', password_hash('password2', PASSWORD_BCRYPT, ['cost' => 13]), 'John', 'Joe', 1, time(), time()],
+			[2, 'john.doe@example.com', password_hash('password2', PASSWORD_BCRYPT, ['cost' => 13]), 'John', 'Joe', 2, time(), time()],
 			[3, 'johnie.doe@example.com', password_hash('password3', PASSWORD_BCRYPT, ['cost' => 13]), 'Johnie', 'Joe', 1, time(), time()],
 			[4, 'admin@example.com', password_hash('admin', PASSWORD_BCRYPT, ['cost' => 13]), 'Site', 'Administrator', 2, time(), time()]
 		]);
