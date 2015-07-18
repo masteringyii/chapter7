@@ -1,7 +1,7 @@
-## Mastering Yii Chapter 4 Source Code
+## Mastering Yii Chapter 5 Source Code
 
 The following source code is the project for Chapter 4 of Mastering Yii
-ISBN-CH: 978-1-78588-242-5_04
+ISBN-CH: 978-1-78588-242-5_05
 
 ### Requirements
 

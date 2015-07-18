@@ -4,6 +4,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => require(__DIR__ . '/module.php'),
     'components' => [
         'request' => [
             'cookieValidationKey' => 'MrQsU247npsU3Q5bRP8BNff3_hESH80H',
@@ -40,11 +41,9 @@ $config = [
 if (APPLICATION_ENV == "dev")
 {
     $config['bootstrap'][] = 'gii';
-    $config['modules'] = [
-        'gii' => [
-            'class' => 'yii\gii\Module',
-            'allowedIPs' => ['*']
-        ] 
+    $config['modules']['gii'] = [
+        'class' => 'yii\gii\Module',
+        'allowedIPs' => ['*']
     ];
 }
 

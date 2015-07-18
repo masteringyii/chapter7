@@ -8,6 +8,7 @@ if (!defined('APPLICATION_ENV'))
     else 
        define('APPLICATION_ENV', 'prod');
 }
+define('DS', DIRECTORY_SEPARATOR);
 
 $env = require(__DIR__ . '/../config/env.php');
 

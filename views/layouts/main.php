@@ -41,11 +41,11 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
-        <div class="container">
+        <div class="container" style="margin-top: 100px;">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
-            <?= $content ?>
+            <?php echo $content ?>
         </div>
     </div>
 
