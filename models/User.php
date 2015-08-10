@@ -113,52 +113,25 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     { 
-
-        $model = self::find()->where(['id' => $id])->one();
-
-        if (!count($model))
-            return null;
-
-        return new static($model);
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param  string      $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        $model = self::find()->where(['email' => $username])->one();
-
-        if (!count($model))
-            return null;
-
-        return new static($model);
+        return static::findOne($id);
     }
 
     /** 
      * @inheritdoc
-     * Not used
      */
     public static function findIdentityByAccessToken($token, $type=null)
     {
-        return null;
+        return static::findOne(['access_token' => $token]);
     }
 
-    /** 
-     * @inheritdoc
-     * Not used
+    /**
+     * @return string current user auth key
      */
-    public function getAuthKey()
-    {
-        return null;
-    }
+    public function getAuthKey() {}
 
-    /** 
-     * @inheritdoc
-     * Not used
+    /**
+     * @param string $authKey
+     * @return boolean if auth key is valid for current user
      */
     public function validateAuthKey($authKey)
     {

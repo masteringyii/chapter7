@@ -56,7 +56,7 @@ class UserForm extends \yii\base\Model
     public function login()
     {
         if ($this->validate())
-            if (Yii::$app->user->login($this->getUser(), 3600*24*30))
+            if (Yii::$app->user->login($this->getUser()))
                 return true;
         
         return false;
@@ -69,7 +69,7 @@ class UserForm extends \yii\base\Model
     public function getUser()
     {
         if ($this->_user === false)
-            $this->_user = User::findByUsername($this->email);
+            $this->_user = User::findOne(['email' => $this->email]);
 
         return $this->_user;
     }

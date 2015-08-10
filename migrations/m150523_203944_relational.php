@@ -15,6 +15,8 @@ class m150523_203944_relational extends Migration
             'first_name'   => Schema::TYPE_STRING,
             'last_name'    => Schema::TYPE_STRING,
 			'role_id' 	   => Schema::TYPE_INTEGER . ' DEFAULT 1',
+			'access_token' => Schema::TYPE_STRING,
+			'auth_token'   => Schema::TYPE_STRING,
             'created_at'   => Schema::TYPE_INTEGER,
             'updated_at'   => Schema::TYPE_INTEGER,
 			'FOREIGN KEY(role_id) REFERENCES role(id)'
