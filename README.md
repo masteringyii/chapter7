@@ -24,3 +24,17 @@ ISBN-CH: 978-1-78588-242-5_05
   - assets
 
 5. Point your web browser to your application and you should see the application fire up.
+
+### Additional Instructions
+
+1. Run the default migrations
+
+```
+./yii migrate/up --interactive=0
+```
+
+2. Run the RBAC migrations
+
+```
+./yii migrate --migrationPath=@yii/rbac/migrations --interactive=0
+```

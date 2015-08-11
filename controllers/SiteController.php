@@ -34,14 +34,20 @@ class SiteController extends Controller
                     else
                         throw new HttpException('403', 'You are not allowed to access this page');
                 },
-                'only' => ['secure'],
+                'only' => [ 'secure', 'authenticated' ],
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => [ 'secure' ],
                         'matchCallback' => function($rule, $action) {
                             return !\Yii::$app->user->isGuest && \Yii::$app->user->identity->role->id === 2;
                         }
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => [ 'authenticated' ],
+                        'roles' => ['@']
+                    ]
                 ],
             ],
         ];
@@ -57,6 +63,11 @@ class SiteController extends Controller
         return $this->render('secure');
     }
 
+    public function actionAuthenticated()
+    {
+        return $this->render('authenticated');
+    }
+
     public function actionLogin()
     {
         $model = new \app\models\UserForm(['scenario' => 'login']);
@@ -64,7 +75,13 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()))
         {
             if ($model->login())
-                return $this->redirect('secure');
+            {
+                if (\Yii::$app->user->identity->role->id === 2)
+                    return $this->redirect('secure');
+
+                return $this->redirect('authenticated');
+
+            }
         }
 
         return $this->render('login', [
@@ -76,10 +93,12 @@ class SiteController extends Controller
     {
         $model = new \app\models\UserForm(['scenario' => 'register']);
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                // form inputs are valid, do something here
-                return;
+        if ($model->load(Yii::$app->request->post()))
+        {
+            if ($model->register())
+            {
+                \Yii::$app->getSession()->setFlash('warning', 'Your account has been registered, you may now login');
+                return $this->redirect('login');
             }
         }
 

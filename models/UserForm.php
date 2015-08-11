@@ -50,6 +50,28 @@ class UserForm extends \yii\base\Model
     }
 
     /**
+     * Registration method to run on the register scenario
+     * @return boolean
+     */
+    public function register()
+    {
+        if ($this->validate())
+        {
+            $user = new User;
+            $user->attributes = [
+                'email'     => $this->email,
+                'password'  => password_hash($this->password, PASSWORD_BCRYPT, ['cost' => 13])
+            ];
+            
+            $user->setFullName($this->name);
+
+            return $user->save();
+        }
+
+        return false;
+    }
+
+    /**
      * Logs in a user using the provided email and password.
      * @return boolean whether the user is logged in successfully
      */
