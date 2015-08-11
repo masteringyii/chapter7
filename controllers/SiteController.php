@@ -39,7 +39,7 @@ class SiteController extends Controller
                     [
                         'allow' => true,
                         'matchCallback' => function($rule, $action) {
-                            return !\Yii::$app->user->isGuest && !empty(\Yii::$app->user->getIdentity());
+                            return !\Yii::$app->user->isGuest && \Yii::$app->user->identity->role->id === 2;
                         }
                     ],
                 ],
